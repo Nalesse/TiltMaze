@@ -5,8 +5,8 @@ using UnityEngine;
 public class Maze : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
-    [SerializeField] float verticleInput;
-    [SerializeField] float horizontalInput;
+    [SerializeField] private float xRotationLimit;
+    [SerializeField] private float zRotationLimit;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,26 +15,53 @@ public class Maze : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        verticleInput = Input.GetAxis("Vertical");
-        horizontalInput = Input.GetAxis("Horizontal");
-        
-        Vector3 forward = new Vector3(1, 0, 0);
-        Vector3 left = new Vector3(0, 0, -1);
+        MazeRotation();
+    }
 
-        transform.Rotate(forward * Time.deltaTime * rotationSpeed * verticleInput);
-        transform.Rotate(left * Time.deltaTime * rotationSpeed * horizontalInput);
+    private void MazeRotation()
+    {
+        // reference to axis's 
+        float verticleInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
 
+        // Made my own vector 3 variables because the way the game is ordinated made Vector3.left incorrect  
+        Vector3 forwardAndBack = new Vector3(1, 0, 0);
+        Vector3 rightAndLeft = new Vector3(0, 0, -1);
+
+        // Rotation controls for rotating the maze
+        // forward and back rotation
+        transform.Rotate(forwardAndBack * Time.deltaTime * rotationSpeed * verticleInput);
+        // right and left rotation
+        transform.Rotate(rightAndLeft * Time.deltaTime * rotationSpeed * horizontalInput);
+
+        // stores the current Euler rotation inside a variable 
         Vector3 rotation = transform.localEulerAngles;
+        // Prevents rotation on the y axis
         rotation.y = 0;
 
-        if (rotation.x >= 16 && verticleInput > 0)
+        // Angle limits for every axis, positive and negative directions
+
+        // positive x rotation limit
+        if (rotation.x >= xRotationLimit && rotation.x <= 90 && verticleInput > 0)
         {
-            rotation.x = 16;
+            rotation.x = xRotationLimit;
         }
-        
-
+        // negative x rotation limit
+        if (rotation.x <= (360 - xRotationLimit) && rotation.x >= 270 && verticleInput < 0)
+        {
+            rotation.x = (360 - xRotationLimit);
+        }
+        // positive z rotation limit
+        if (rotation.z >= zRotationLimit && rotation.z <= 90 && horizontalInput < 0)
+        {
+            rotation.z = zRotationLimit;
+        }
+        // negative z rotation limit 
+        if (rotation.z <= (360 - zRotationLimit) && rotation.z >= 270 && horizontalInput > 0)
+        {
+            rotation.z = (360 - zRotationLimit);
+        }
+        // converts the Euler rotation into a Quaternion
         transform.rotation = Quaternion.Euler(rotation);
-
-
     }
 }

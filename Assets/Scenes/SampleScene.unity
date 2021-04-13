@@ -3372,8 +3372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 25
-  verticleInput: 0
-  horizontalInput: 0
+  xRotationLimit: 16
+  zRotationLimit: 16
 --- !u!1 &1697934768
 GameObject:
   m_ObjectHideFlags: 0
