@@ -10,7 +10,6 @@ public class Maze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.Rotate(0, 5, 0);
     }
 
     // Update is called once per frame
@@ -21,14 +20,20 @@ public class Maze : MonoBehaviour
         
         Vector3 forward = new Vector3(1, 0, 0);
         Vector3 left = new Vector3(0, 0, -1);
-        Vector3 up = new Vector3(0, 1, 0);
 
         transform.Rotate(forward * Time.deltaTime * rotationSpeed * verticleInput);
         transform.Rotate(left * Time.deltaTime * rotationSpeed * horizontalInput);
 
-        Vector3 myRotation = transform.rotation.eulerAngles;
-        myRotation.y = 0;
-        transform.rotation = Quaternion.Euler(myRotation);
+        Vector3 rotation = transform.localEulerAngles;
+        rotation.y = 0;
+
+        if (rotation.x >= 16 && verticleInput > 0)
+        {
+            rotation.x = 16;
+        }
+        
+
+        transform.rotation = Quaternion.Euler(rotation);
 
 
     }
