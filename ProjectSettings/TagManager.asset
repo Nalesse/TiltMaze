@@ -7,6 +7,7 @@ TagManager:
   - Key
   - Obsticle
   - Portal
+  - Ball
   layers:
   - Default
   - TransparentFX
