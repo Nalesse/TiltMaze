@@ -7,10 +7,12 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private bool hasKey = false;
     List<GameObject> portals = new List<GameObject>();
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,11 @@ public class Ball : MonoBehaviour
         {
             hasKey = true;
             Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Goal"))
+        {
+            gameManager.GoalReached();
         }
     }
 
