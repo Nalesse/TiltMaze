@@ -9,6 +9,7 @@ TagManager:
   - Portal
   - Ball
   - Goal
+  - Maze
   layers:
   - Default
   - TransparentFX

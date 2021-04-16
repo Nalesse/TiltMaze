@@ -8,12 +8,14 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+
         float offset = -30;
 
         // follows the ball on the z axis + an offset 

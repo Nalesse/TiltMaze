@@ -7,9 +7,14 @@ public class Maze : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float xRotationLimit;
     [SerializeField] private float zRotationLimit;
+
+    [SerializeField] private Vector3[] spawnPostions;
+    [SerializeField] private GameObject key;
+    [SerializeField] private GameObject portal;
     // Start is called before the first frame update
     void Start()
     {
+        SpawnItems();
     }
 
     // Update is called once per frame
@@ -63,5 +68,25 @@ public class Maze : MonoBehaviour
         }
         // converts the Euler rotation into a Quaternion
         transform.rotation = Quaternion.Euler(rotation);
+    }
+
+    private void SpawnItems()
+    {
+        int spawnIndex = Random.Range(0, spawnPostions.Length);
+
+        var spawnedKey = Instantiate(key, spawnPostions[spawnIndex], key.transform.rotation);
+        spawnedKey.transform.parent = gameObject.transform;
+
+        while (spawnPostions[spawnIndex] == spawnedKey.transform.position)
+        {
+            Debug.Log("spawnIndex was equal");
+
+            spawnIndex = Random.Range(0, spawnPostions.Length);
+        }
+        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex], portal.transform.rotation);
+        spawnedPortal.transform.parent = gameObject.transform;
+
+  
+
     }
 }

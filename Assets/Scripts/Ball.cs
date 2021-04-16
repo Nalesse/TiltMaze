@@ -6,13 +6,20 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private bool hasKey = false;
-    List<GameObject> portals = new List<GameObject>();
+    public List<GameObject> portals = new List<GameObject>();
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        for (int i = 0; i < portals.Count; ++i)
+        {
+            Destroy(portals[i]);
+        }
+        portals.Clear();
+        portals.Capacity = 0;
+        portals.TrimExcess();
+        portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
     }
 
     // Update is called once per frame
