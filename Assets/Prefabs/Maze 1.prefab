@@ -914,6 +914,7 @@ MonoBehaviour:
   - {x: 1.88, y: 1, z: 6.02}
   key: {fileID: 7745206900330962331, guid: 95e565c53bc3b154b98ca7f39d7c6484, type: 3}
   portal: {fileID: 8451210999025666755, guid: c4a672b5d6b1ce640925f26228e19a17, type: 3}
+  timerLength: 90
 --- !u!1 &3169789577571369493
 GameObject:
   m_ObjectHideFlags: 0

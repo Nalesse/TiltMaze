@@ -32,4 +32,31 @@ public class GameManager : MonoBehaviour
         int spawnIndex = Random.Range(0, mazes.Length);
         Instantiate(mazes[spawnIndex], mazes[spawnIndex].transform.position, mazes[spawnIndex].transform.rotation);
     }
+
+    IEnumerator StartTimer(float timerLength)
+    {
+        float oldMinutes = 0; 
+        float oldSeconds = 0;
+
+        for (float i = timerLength; i > 0; i -= Time.deltaTime)
+        {
+            float minutes = Mathf.FloorToInt(i / 60);
+            float seconds = Mathf.FloorToInt(i % 60);
+
+            // Only redraw if not same
+            if (oldSeconds != seconds || oldMinutes != minutes)
+            {
+                timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+            }
+
+            oldSeconds = seconds;
+            oldMinutes = minutes;
+            
+            yield return null;
+            
+        }
+        Debug.Log("Timer reached 0");
+    }
+
+
 }

@@ -154,10 +154,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 105, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 6, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &281803652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f61d82c6dffc040a70832cf1a17d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 281803652}
+  timerText: {fileID: 281803652}
   mazes:
   - {fileID: 3169789577549968676, guid: 1475e2ab90b80f64d80d1dadd4316e43, type: 3}
 --- !u!1 &1042073987

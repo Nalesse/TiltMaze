@@ -11,10 +11,15 @@ public class Maze : MonoBehaviour
     [SerializeField] private Vector3[] spawnPostions;
     [SerializeField] private GameObject key;
     [SerializeField] private GameObject portal;
+
+    private GameManager gameManager;
+    [SerializeField] private float timerLength;
     // Start is called before the first frame update
     void Start()
     {
         SpawnItems();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager.StartCoroutine("StartTimer", timerLength);
     }
 
     // Update is called once per frame
@@ -79,8 +84,6 @@ public class Maze : MonoBehaviour
 
         while (spawnPostions[spawnIndex] == spawnedKey.transform.position)
         {
-            Debug.Log("spawnIndex was equal");
-
             spawnIndex = Random.Range(0, spawnPostions.Length);
         }
         var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex], portal.transform.rotation);

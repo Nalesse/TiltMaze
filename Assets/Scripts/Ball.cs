@@ -60,16 +60,21 @@ public class Ball : MonoBehaviour
 
             int index = portals.IndexOf(collision.gameObject);
             Vector3 offset = new Vector3(2, 0, 0);
-            
-            switch(index)
-            {
-                case 0:
-                    transform.position = portals[index + 1].transform.position + offset;
-                    break;
-                case 1:
-                    transform.position = portals[index - 1].transform.position + offset;
-                    break;
-            }
+
+            int normalIndex = index == 0 ? 1 : 0;
+
+            // This is the long form of the unary operator above
+            //int normalIndex = 0;
+            //if (index == 0)
+            //{
+            //    normalIndex = 1;
+            //}
+            //else if (index == 1)
+            //{
+            //    normalIndex = 0;
+            //}
+
+            transform.position = portals[normalIndex].transform.position + offset;
         }
     }
 }
