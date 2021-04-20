@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             yield return null;
             
         }
-        Debug.Log("Timer reached 0");
+        Debug.Log("Game Over");
     }
 
 
