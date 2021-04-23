@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Goal
   - Maze
+  - KeyUI
   layers:
   - Default
   - TransparentFX

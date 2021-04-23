@@ -8,17 +8,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private bool hasKey = false;
     public List<GameObject> portals = new List<GameObject>();
     private GameManager gameManager;
+    private GameObject key;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        for (int i = 0; i < portals.Count; ++i)
-        {
-            Destroy(portals[i]);
-        }
-        portals.Clear();
-        portals.Capacity = 0;
-        portals.TrimExcess();
+        key = GameObject.FindGameObjectWithTag("KeyUI");
+        key.SetActive(false);
         portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
     }
 
@@ -33,6 +29,7 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("Key"))
         {
             hasKey = true;
+            key.SetActive(true);
             Destroy(other.gameObject);
         }
 
@@ -51,6 +48,7 @@ public class Ball : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 hasKey = false;
+                key.SetActive(false);
             }
         }
 
