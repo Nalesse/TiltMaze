@@ -8,11 +8,21 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject[] mazes;
+    [SerializeField] private GameObject TitleScreen;
+    [SerializeField] private GameObject winUI;
+    [SerializeField] private GameObject gameOverUI;
+    private static bool gameFirstRun = true;
     
     // Start is called before the first frame update
     void Start()
     {
         SpawnMaze();
+        
+        if (gameFirstRun)
+        {
+            Time.timeScale = 0;
+            TitleScreen.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -24,13 +34,34 @@ public class GameManager : MonoBehaviour
     public void GoalReached()
     {
         Debug.Log("Goal Reached");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        Time.timeScale = 0;
+        winUI.SetActive(true);    
     }
 
     private void SpawnMaze()
     {
         int spawnIndex = Random.Range(0, mazes.Length);
         Instantiate(mazes[spawnIndex], mazes[spawnIndex].transform.position, mazes[spawnIndex].transform.rotation);
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        TitleScreen.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        gameFirstRun = true;
+        Application.Quit();
+        Debug.Log("Game Quit");
+    }
+
+    public void RestartGame()
+    {
+        gameFirstRun = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator StartTimer(float timerLength)
@@ -56,6 +87,8 @@ public class GameManager : MonoBehaviour
             
         }
         Debug.Log("Game Over");
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0;
     }
 
 

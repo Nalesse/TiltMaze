@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         key = GameObject.FindGameObjectWithTag("KeyUI");
-        key.SetActive(false);
+        key.gameObject.SetActive(false);
         portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
     }
 
@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("Key"))
         {
             hasKey = true;
-            key.SetActive(true);
+            key.gameObject.SetActive(false);
             Destroy(other.gameObject);
         }
 
