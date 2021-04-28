@@ -86,7 +86,9 @@ public class Maze : MonoBehaviour
         {
             spawnIndex = Random.Range(0, spawnPostions.Length);
         }
-        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex], portal.transform.rotation);
+
+        Vector3 offset = new Vector3(0, 0.893f, 0);
+        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex] + offset, portal.transform.rotation);
         spawnedPortal.transform.parent = gameObject.transform;
 
   

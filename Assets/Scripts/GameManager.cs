@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+#pragma warning disable 649
 
 public class GameManager : MonoBehaviour
 {
@@ -17,12 +18,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SpawnMaze();
-        
-        if (gameFirstRun)
-        {
-            Time.timeScale = 0;
-            TitleScreen.SetActive(true);
-        }
+
+        if (!gameFirstRun) return;
+        Time.timeScale = 0;
+        TitleScreen.SetActive(true);
     }
 
     // Update is called once per frame
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnMaze()
     {
-        int spawnIndex = Random.Range(0, mazes.Length);
+        var spawnIndex = Random.Range(0, mazes.Length);
         Instantiate(mazes[spawnIndex], mazes[spawnIndex].transform.position, mazes[spawnIndex].transform.rotation);
     }
 
