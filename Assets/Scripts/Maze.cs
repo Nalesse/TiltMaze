@@ -79,16 +79,19 @@ public class Maze : MonoBehaviour
     {
         int spawnIndex = Random.Range(0, spawnPostions.Length);
 
-        var spawnedKey = Instantiate(key, spawnPostions[spawnIndex], key.transform.rotation);
+        Vector3 keyOffset = new Vector3(0, 1, 0);
+
+        var spawnedKey = Instantiate(key, spawnPostions[spawnIndex] + keyOffset, key.transform.rotation);
         spawnedKey.transform.parent = gameObject.transform;
 
-        while (spawnPostions[spawnIndex] == spawnedKey.transform.position)
+
+        while (spawnPostions[spawnIndex] + keyOffset == spawnedKey.transform.position)
         {
             spawnIndex = Random.Range(0, spawnPostions.Length);
         }
 
-        Vector3 offset = new Vector3(0, 0.893f, 0);
-        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex] + offset, portal.transform.rotation);
+        Vector3 portalOffset = new Vector3(0, 0.893f, 0);
+        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex] + portalOffset, portal.transform.rotation);
         spawnedPortal.transform.parent = gameObject.transform;
 
   
