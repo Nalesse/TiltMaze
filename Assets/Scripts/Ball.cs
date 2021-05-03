@@ -57,7 +57,7 @@ public class Ball : MonoBehaviour
             // Gets the index of the portal that the ball collided with then sends the ball to the other portal
 
             int index = portals.IndexOf(collision.gameObject);
-            Vector3 offset = new Vector3(2, 0, 0);
+            Vector3 offset = new Vector3(0, 0, -2);
 
             int normalIndex = index == 0 ? 1 : 0;
 
