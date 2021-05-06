@@ -12,6 +12,7 @@ public class Maze : MonoBehaviour
     [SerializeField] private GameObject key;
     [SerializeField] private GameObject portal;
 
+
     private GameManager gameManager;
     [SerializeField] private float timerLength;
     // Start is called before the first frame update
