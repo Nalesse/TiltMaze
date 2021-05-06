@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     public List<GameObject> portals = new List<GameObject>();
     private GameManager gameManager;
     private GameObject key;
+
+    private bool portalEnabled = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,11 +57,15 @@ public class Ball : MonoBehaviour
         if (collision.collider.CompareTag("Portal"))
         {
             // Gets the index of the portal that the ball collided with then sends the ball to the other portal
-
-            int index = portals.IndexOf(collision.gameObject);
-            Vector3 offset = new Vector3(0, 0, -2);
-
-            int normalIndex = index == 0 ? 1 : 0;
+            if (portalEnabled)
+            {
+                int index = portals.IndexOf(collision.gameObject);
+                Vector3 offset = new Vector3(0, 0, -2);
+                int normalIndex = index == 0 ? 1 : 0;
+                transform.position = portals[normalIndex].transform.position + offset;
+                StartCoroutine(PortalDelay());
+            }
+            
 
             // This is the long form of the unary operator above
             //int normalIndex = 0;
@@ -72,7 +78,14 @@ public class Ball : MonoBehaviour
             //    normalIndex = 0;
             //}
 
-            transform.position = portals[normalIndex].transform.position + offset;
+            
         }
+    }
+
+    private IEnumerator PortalDelay()
+    {
+        portalEnabled = false;
+        yield return new WaitForSeconds(2);
+        portalEnabled = true;
     }
 }

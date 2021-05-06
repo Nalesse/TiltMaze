@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Maze : MonoBehaviour
 {
@@ -10,11 +12,14 @@ public class Maze : MonoBehaviour
 
     [SerializeField] private Vector3[] spawnPostions;
     [SerializeField] private GameObject key;
+    [SerializeField] private int numberOfKeys;
     [SerializeField] private GameObject portal;
 
 
     private GameManager gameManager;
     [SerializeField] private float timerLength;
+
+    private List<Vector3> usedSpawnPos = new List<Vector3>();
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +46,9 @@ public class Maze : MonoBehaviour
 
         // Rotation controls for rotating the maze
         // forward and back rotation
-        transform.Rotate(forwardAndBack * Time.deltaTime * rotationSpeed * verticleInput);
+        transform.Rotate(forwardAndBack * (Time.deltaTime * rotationSpeed * verticleInput));
         // right and left rotation
-        transform.Rotate(rightAndLeft * Time.deltaTime * rotationSpeed * horizontalInput);
+        transform.Rotate(rightAndLeft * (Time.deltaTime * rotationSpeed * horizontalInput));
 
         // stores the current Euler rotation inside a variable 
         Vector3 rotation = transform.localEulerAngles;
@@ -78,24 +83,36 @@ public class Maze : MonoBehaviour
 
     private void SpawnItems()
     {
-        int spawnIndex = Random.Range(0, spawnPostions.Length);
-
-        Vector3 keyOffset = new Vector3(0, 1, 0);
-
-        var spawnedKey = Instantiate(key, spawnPostions[spawnIndex] + keyOffset, key.transform.rotation);
-        spawnedKey.transform.parent = gameObject.transform;
-
-
-        while (spawnPostions[spawnIndex] + keyOffset == spawnedKey.transform.position)
+        var keyOffset = new Vector3(0, 1, 0);
+        for (int i = 0; i < numberOfKeys; i++)
         {
-            spawnIndex = Random.Range(0, spawnPostions.Length);
+            var spawnedKey = Instantiate(key, GenerateSpawnPos() + keyOffset, key.transform.rotation);
+            spawnedKey.transform.parent = gameObject.transform;
+        }
+        
+        var portalOffset = new Vector3(0, 0.893f, 0);
+        for (int i = 0; i < 2; i++)
+        {
+            var spawnedPortal = Instantiate(portal, GenerateSpawnPos() + portalOffset, portal.transform.rotation);
+            spawnedPortal.transform.parent = gameObject.transform;
+        }
+        
+    }
+
+    private Vector3 GenerateSpawnPos()
+    {
+        if (usedSpawnPos.Count != spawnPostions.Length)
+        {
+            var spawnIndex = Random.Range(0, spawnPostions.Length);
+
+            while (usedSpawnPos.Contains(spawnPostions[spawnIndex]))
+            {
+                spawnIndex = Random.Range(0, spawnPostions.Length);
+            }
+            usedSpawnPos.Add(spawnPostions[spawnIndex]);
+            return spawnPostions[spawnIndex];
         }
 
-        Vector3 portalOffset = new Vector3(0, 0.893f, 0);
-        var spawnedPortal = Instantiate(portal, spawnPostions[spawnIndex] + portalOffset, portal.transform.rotation);
-        spawnedPortal.transform.parent = gameObject.transform;
-
-  
-
+        throw new Exception("The number of spawn positions you are trying to generate exceeds the limit. Either add more spawn positions to the map or reduce the number of items you are trying to spawn");
     }
 }

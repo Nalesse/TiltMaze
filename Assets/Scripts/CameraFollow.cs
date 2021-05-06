@@ -5,16 +5,19 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private GameObject ball;
+
+    private GameObject ballPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ballPos = GameObject.FindGameObjectWithTag("Ball");
     }
 
     // Update is called once per frame
     void Update()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
+        ball = ballPos;
 
         float offset = -30;
 

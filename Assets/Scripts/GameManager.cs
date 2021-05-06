@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     public void GoalReached()
     {
-        Debug.Log("Goal Reached");
         Time.timeScale = 0;
         winUI.SetActive(true);    
     }
@@ -67,7 +66,6 @@ public class GameManager : MonoBehaviour
     {
         float oldMinutes = 0; 
         float oldSeconds = 0;
-
         for (float i = timerLength; i > 0; i -= Time.deltaTime)
         {
             float minutes = Mathf.FloorToInt(i / 60);
@@ -76,7 +74,7 @@ public class GameManager : MonoBehaviour
             // Only redraw if not same
             if (oldSeconds != seconds || oldMinutes != minutes)
             {
-                timerText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+                timerText.text = "Timer: " + $"{minutes:00}:{seconds:00}";
             }
 
             oldSeconds = seconds;
@@ -85,7 +83,6 @@ public class GameManager : MonoBehaviour
             yield return null;
             
         }
-        Debug.Log("Game Over");
         gameOverUI.SetActive(true);
         Time.timeScale = 0;
     }
