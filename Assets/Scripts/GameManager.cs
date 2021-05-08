@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-#pragma warning disable 649
 
 public class GameManager : MonoBehaviour
 {
