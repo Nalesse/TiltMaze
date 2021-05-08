@@ -14,6 +14,7 @@ public class Maze : MonoBehaviour
     [SerializeField] private GameObject key;
     [SerializeField] private int numberOfKeys;
     [SerializeField] private GameObject portal;
+    [SerializeField] private float minPortalDistance;
 
 
     private GameManager gameManager;
@@ -83,36 +84,54 @@ public class Maze : MonoBehaviour
 
     private void SpawnItems()
     {
+        // adds an offset so that the portal spawns in correctly 
+        var portalOffset = new Vector3(0, 0.893f, 0);
+        // the for loop iterates two times so that two portals are spawned
+        for (int i = 0; i < 2; i++)
+        {
+            // Generates a random spawn position
+            var portalPosition = GenerateSpawnPos();
+            if (i == 1)
+            {
+                // on the second iteration before the second portal is spawned the distance
+                // of the spawn position is compared to the first portal to make sure they do not spawn too close together  
+                var firstPortal = GameObject.FindGameObjectWithTag("Portal");
+                while (Vector3.Distance(firstPortal.transform.position, portalPosition) < minPortalDistance)
+                {
+                    portalPosition = GenerateSpawnPos();
+                }
+            }
+
+            var spawnedPortal = Instantiate(portal, portalPosition + portalOffset, portal.transform.rotation);
+            spawnedPortal.transform.parent = gameObject.transform;
+            
+        }
+
         var keyOffset = new Vector3(0, 1, 0);
+        //the key is in a loop just so that any number of keys can be spawned, only 1 is spawned on every level because
+        //I did not have enough time to figure out how to ensure the keys spawned before the gates. But I left the loop so that I can build on it later 
         for (int i = 0; i < numberOfKeys; i++)
         {
             var spawnedKey = Instantiate(key, GenerateSpawnPos() + keyOffset, key.transform.rotation);
             spawnedKey.transform.parent = gameObject.transform;
         }
-        
-        var portalOffset = new Vector3(0, 0.893f, 0);
-        for (int i = 0; i < 2; i++)
-        {
-            var spawnedPortal = Instantiate(portal, GenerateSpawnPos() + portalOffset, portal.transform.rotation);
-            spawnedPortal.transform.parent = gameObject.transform;
-        }
-        
+
     }
 
     private Vector3 GenerateSpawnPos()
     {
-        if (usedSpawnPos.Count != spawnPostions.Length)
+        // this method ensures that a unique spawn position is generated every time, by putting the used positions in a separate array. 
+        if (usedSpawnPos.Count == spawnPostions.Length)
+            throw new Exception(
+                "The number of spawn positions you are trying to generate exceeds the limit. Either add more spawn positions to the map or reduce the number of items you are trying to spawn");
+        var spawnIndex = Random.Range(0, spawnPostions.Length);
+
+        while (usedSpawnPos.Contains(spawnPostions[spawnIndex]))
         {
-            var spawnIndex = Random.Range(0, spawnPostions.Length);
-
-            while (usedSpawnPos.Contains(spawnPostions[spawnIndex]))
-            {
-                spawnIndex = Random.Range(0, spawnPostions.Length);
-            }
-            usedSpawnPos.Add(spawnPostions[spawnIndex]);
-            return spawnPostions[spawnIndex];
+            spawnIndex = Random.Range(0, spawnPostions.Length);
         }
+        usedSpawnPos.Add(spawnPostions[spawnIndex]);
+        return spawnPostions[spawnIndex];
 
-        throw new Exception("The number of spawn positions you are trying to generate exceeds the limit. Either add more spawn positions to the map or reduce the number of items you are trying to spawn");
     }
 }

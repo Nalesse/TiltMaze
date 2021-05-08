@@ -20,12 +20,6 @@ public class Ball : MonoBehaviour
         portals = GameObject.FindGameObjectsWithTag("Portal").ToList();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Key"))
@@ -67,7 +61,7 @@ public class Ball : MonoBehaviour
             }
             
 
-            // This is the long form of the unary operator above
+            // This is the long form of the unary operator above. This is kept in as a note to myself.
             //int normalIndex = 0;
             //if (index == 0)
             //{
@@ -84,6 +78,7 @@ public class Ball : MonoBehaviour
 
     private IEnumerator PortalDelay()
     {
+        // adds a portal delay so you don't go back and forth between the portals
         portalEnabled = false;
         yield return new WaitForSeconds(2);
         portalEnabled = true;

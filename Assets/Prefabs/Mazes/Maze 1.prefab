@@ -686,8 +686,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.67, y: 1.55042, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.790649, y: 1.55042, z: 1}
+  m_Center: {x: -0.47174025, y: 0, z: -4.0159357e-16}
 --- !u!1 &2795065462489714153
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,9 +900,12 @@ MonoBehaviour:
   - {x: -4.19, y: 1, z: -17.69}
   - {x: -14.27, y: 1, z: -1.78}
   - {x: 1.88, y: 1, z: 6.02}
+  - {x: -21.73, y: 1, z: 21.86}
+  - {x: -3.58, y: 1, z: 16.56}
   key: {fileID: 4136847777299145772, guid: 95e565c53bc3b154b98ca7f39d7c6484, type: 3}
   numberOfKeys: 1
   portal: {fileID: 1200769447007814856, guid: c4a672b5d6b1ce640925f26228e19a17, type: 3}
+  minPortalDistance: 10
   timerLength: 90
 --- !u!1 &3169789578780330096
 GameObject:
@@ -4354,7 +4357,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
@@ -4364,7 +4367,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}

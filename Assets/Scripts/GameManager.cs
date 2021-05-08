@@ -23,12 +23,6 @@ public class GameManager : MonoBehaviour
         TitleScreen.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GoalReached()
     {
         Time.timeScale = 0;
@@ -65,20 +59,25 @@ public class GameManager : MonoBehaviour
     {
         float oldMinutes = 0; 
         float oldSeconds = 0;
+        // decrements by time.DeltaTime to countdown in real time
         for (float i = timerLength; i > 0; i -= Time.deltaTime)
         {
+            // converts the current time left into minutes and seconds
             float minutes = Mathf.FloorToInt(i / 60);
             float seconds = Mathf.FloorToInt(i % 60);
 
-            // Only redraw if not same
+            // Only redraw if not same. This is just to reduce the amount of time that is spent on this loop, for performance reasons.
             if (oldSeconds != seconds || oldMinutes != minutes)
             {
+                // formats the minutes and seconds to always be two digits so that it looks like a timer 
                 timerText.text = "Timer: " + $"{minutes:00}:{seconds:00}";
             }
 
             oldSeconds = seconds;
             oldMinutes = minutes;
-            
+
+            //briefly exits the IEnumerator so that Time.deltaTime can catch up.
+            //without this, the game would be stuck in the IEnumerator and time.DeltaTime would not be able to change.  
             yield return null;
             
         }

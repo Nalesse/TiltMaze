@@ -686,8 +686,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.67, y: 1.55042, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6.258295, y: 1.55042, z: 1}
+  m_Center: {x: -0.70585275, y: 0, z: -0.00000016828838}
 --- !u!1 &2795065462489714153
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,14 +895,18 @@ MonoBehaviour:
   xRotationLimit: 16
   zRotationLimit: 16
   spawnPostions:
-  - {x: 21.63, y: 1, z: -23.52}
+  - {x: 4.83, y: 1, z: -12.21}
   - {x: 9.26, y: 1, z: 7.01}
   - {x: 18.15, y: 1, z: 18.51}
   - {x: 3.68, y: 1, z: 24.04}
   - {x: 13.62, y: 1, z: -3.68}
+  - {x: -2.57, y: 1, z: -3.5}
+  - {x: 15.81, y: 1, z: -19.61}
+  - {x: 12.77, y: 1, z: 3.71}
   key: {fileID: 4136847777299145772, guid: 95e565c53bc3b154b98ca7f39d7c6484, type: 3}
   numberOfKeys: 1
   portal: {fileID: 1200769447007814856, guid: c4a672b5d6b1ce640925f26228e19a17, type: 3}
+  minPortalDistance: 10
   timerLength: 90
 --- !u!1 &3169789578780330096
 GameObject:
@@ -4369,7 +4373,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
@@ -4379,7 +4383,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a5f52ab0fba1f84990701d187ee90fd,
         type: 3}
