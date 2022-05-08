@@ -10,6 +10,3 @@ Controls
 
 <h3>Time Log</h3>
 <a href="https://docs.google.com/spreadsheets/d/1Oo1Q-rgRU8wAkQm34kdSmqdxUzoH8occHk6mpsQwDlk/edit?usp=sharing">Link</a>
-
-<h3>Tasks</h3>
-Finish making art assets
